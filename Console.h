@@ -25,6 +25,7 @@ class Console {
   int Get_ID();               // Gets ID from user and validates it
   int Get_User_Type();        // Returns user type
   bool Duplicate_ID(int ID);  // Checks if duplicate ID has been given
+  ~Console(); // Destructor
 };
 
 #endif

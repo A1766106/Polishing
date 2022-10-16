@@ -601,3 +601,5 @@ bool Console::Duplicate_ID(int ID) {
   Accounts.close();
   return false;  // otherwise accounts close and return false
 }
+
+Console::~Console(){};
