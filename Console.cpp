@@ -342,7 +342,7 @@ int Console::Create_Individual() {
   getline(cin, Individual_First_Name);
   cout << "Please provide your last name as you would like it to appear on "
           "your portfolio statement: ";
-  getline(cin,Individual_Last_Name); // Takes input of last name
+  getline(cin, Individual_Last_Name);           // Takes input of last name
   fstream Accounts;                             // File object
   Accounts.open("Accounts.csv", fstream::app);  // Open Accounts.csv
   Accounts << Given_ID << "," << Given_Password << ","
@@ -432,7 +432,8 @@ int Console::Create_Trust() {
     cout << "Please provide the first name for beneificary number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
     cin.clear();
-    cin.ignore(256, '\n');;
+    cin.ignore(256, '\n');
+    ;
     getline(cin, Beneficiary_First_Names[i]);
     cout << "Please provide the last name for beneificary number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
@@ -517,11 +518,13 @@ int Console::Create_Company() {
          << " as you would like it to appear on your portfolio statement: ";
     cin.clear();
     cin.ignore(256, '\n');
-    getline(cin,Director_First_Names[i]);  // input director name for current
-                                     // iteration
+    getline(cin, Director_First_Names[i]);  // input director name for current
+                                            // iteration
     cout << "Please provide the last name for director number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
-    getline(cin,Director_Last_Names[i]);  // input director name for current iteration
+    getline(
+        cin,
+        Director_Last_Names[i]);  // input director name for current iteration
   }
   fstream Accounts;                             // file object
   Accounts.open("Accounts.csv", fstream::app);  // Open accounts csv
