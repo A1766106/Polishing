@@ -48,10 +48,6 @@ void Partnership::Get_Partnership_Details() {
   Set_Partners_Names();  // Set partners names
 }
 
-void Partnership::
-    Print_Partnership_Portfolio()  //////////////////////////////////////////
-{}
-
 void Partnership::Partnersip_Display_Results_Test() {
   for (int i = 0; i < Number_Of_Partners;
        i++)  // For loop from 0  to the number of partners

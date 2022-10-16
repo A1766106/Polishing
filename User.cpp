@@ -39,7 +39,7 @@ void User::Set_Account_Type() {
                                // account number...
     {
       Account_Type = Temp_Account_Type;  //...Then the account type is equal to
-                                         //the temp type.
+                                         // the temp type.
       break;
     }
   }

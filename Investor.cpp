@@ -234,9 +234,7 @@ void Investor::Change_Balance(int Transaction) {
   Balance = Balance + Transaction;  // Balance = Balance + Transaction;
 }
 
-void Investor::
-    Display_Portfolio()  ///////////////////////////////////////////////
-{
+void Investor::Display_Portfolio() {
   Investors_Portfolio->Display_Portfolio();  // display portfolio
 }
 

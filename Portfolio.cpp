@@ -19,8 +19,9 @@ Portfolio::Portfolio() {
                                                            // user
   cin >> Cash;  // User will input how much money they want to use
   // While the input is less than zero print this message.
-  while (Cash < 0) {
-    cout << "You entered a negative balance! What would you like your starting "
+  while (Cash <= 0) {
+    cout << "You entered a negative balance or a balance of zero! What would "
+            "you like your starting "
             "balance to be? ";
     cin >> Cash;
   }
@@ -131,13 +132,15 @@ void Portfolio::Display_Portfolio() {
         User_Shares[i].Get_Price(Current_Year);  // Get current price
     int Temp_Previous_Price =
         User_Shares[i].Get_Price(Current_Year - 1);  // Get previous price
-    cout << i + 1 << " - Name: " << User_Shares[i].Get_Name()
-         << " Current Stock Price: $" << User_Shares[i].Get_Price(Current_Year)
-         << " Last Years Stock Price: $"
-         << User_Shares[i].Get_Price(Current_Year - 1)
-         << " Units Held: " << User_Shares[i].Get_Units()
-         << " Current Market Value: $";  // Output Share values
-    cout << Temp_Units * Temp_Current_Price << " 12 Month Stock Change: $"
+    cout << i + 1 << " - Name: " << User_Shares[i].Get_Name() << endl;
+    cout << "\t Current Stock Price: $"
+         << User_Shares[i].Get_Price(Current_Year) << endl;
+    cout << "\t Last Years Stock Price: $"
+         << User_Shares[i].Get_Price(Current_Year - 1) << endl;
+    cout << "\t Units Held: " << User_Shares[i].Get_Units() << endl;
+    cout << "\t Current Market Value: $" << Temp_Units * Temp_Current_Price
+         << endl;
+    cout << "\t 12 Month Stock Change: $"
          << (Temp_Units * Temp_Current_Price) -
                 (Temp_Units * Temp_Previous_Price)
          << endl;  // Calculate and output the 12 month price change
