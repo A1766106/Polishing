@@ -240,5 +240,4 @@ double Portfolio::Get_Cash()
 //Free up memory
 Portfolio::~Portfolio() ///////////////////////////////////////// Need to fix destructor error
 {
-    // delete User_Shares;
 }
