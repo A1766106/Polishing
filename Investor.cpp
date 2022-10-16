@@ -37,9 +37,9 @@ void Investor::Display_Options()  // Display options
       cout << "9 - Sell Stocks " << endl;
       cout << "0 - Log Out" << endl;
       cin >> Option;  // Takes input from user
-      while (Option != "0" || Option != "1" || Option != "2" || Option != "3" ||
-             Option != "4" || Option != "5" || Option != "6" || Option != "7" ||
-             Option != "8" || Option != "9") {
+      while (Option != "0" && Option != "1" && Option != "2" && Option != "3" &&
+             Option != "4" && Option != "5" && Option != "6" && Option != "7" &&
+             Option != "8" && Option != "9") {
         system("Clear");
         cin.clear();
         cin.ignore(256, '\n');

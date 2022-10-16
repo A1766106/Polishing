@@ -493,7 +493,7 @@ int Console::Create_Company() {
   cin >> Director_Number;  // User inputs how many directors there are
   while (cin.fail() || Director_Number < 1)  // Confirming valid input
   {
-    cout << "Invalid Input! How many Trustees are there? ";
+    cout << "Invalid Input! How many Directors are there? ";
     cin.clear();
     cin.ignore(256, '\n');
     cin >> Director_Number;
