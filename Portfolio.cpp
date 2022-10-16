@@ -19,10 +19,12 @@ Portfolio::Portfolio() {
                                                            // user
   cin >> Cash;  // User will input how much money they want to use
   // While the input is less than zero print this message.
-  while (Cash <= 0) {
-    cout << "You entered a negative balance or a balance of zero! What would "
+  while (Cash <= 0 || cin.fail()) {
+    cout << "You entered a invalid balance! What would "
             "you like your starting "
             "balance to be? ";
+    cin.clear();
+    cin.ignore(256, '\n');
     cin >> Cash;
   }
 }

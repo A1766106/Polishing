@@ -79,9 +79,7 @@ void Broker::Set_Commission() {
   Information.close();  // close object
 }
 
-void Broker::Change_Commission(
-    int Given_Commission)  /////////////////////////////////////////////
-{
+void Broker::Change_Commission(int Given_Commission) {
   this->Commission = Given_Commission;  // Change commission to new commission
 }
 
@@ -245,7 +243,6 @@ void Broker::Display_Options() {
            << endl;                                // ask for valid output
       this_thread::sleep_for(chrono::seconds(1));  // display for 1 second
       system("Clear");                             // clear terminal
-      string Option;                               // create option string
       cout << "Please select the number correlating to the function you wish "
               "to utilise: "
            << endl;
@@ -477,12 +474,24 @@ void Broker::Swap_Clients() {
   int Add_Client;     // create variable of client being added
   cout << "Which client would you like to remove: ";
   cin >> Remove_Client;  // take input if the client being removed
+  while (cin.fail()) {
+    cout << "An Error Occured! Which client would you like to remove: ";
+    cin.clear();
+    cin.ignore(256, '\n');
+    cin >> Remove_Client;
+  }
   if (Check_Remove_Choice(
           Remove_Client))  // if statement to check if the removed client and
                            // choice are the same
   {
     cout << "What client would you like to add: ";
-    cin >> Add_Client;                 // take input of the client beinf added
+    cin >> Add_Client;  // take input of the client beinf added
+    while (cin.fail()) {
+      cout << "An Error Occured! Which client would you like to add: ";
+      cin.clear();
+      cin.ignore(256, '\n');
+      cin >> Add_Client;
+    }
     if (Check_Add_Choice(Add_Client))  // add client to spot
     {
       if (!Check_Remove_Choice(Add_Client))  // if not the same choice

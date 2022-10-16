@@ -48,7 +48,6 @@ void Investor::Display_Options()  // Display options
                        // this message
         this_thread::sleep_for(chrono::seconds(1));  // display for 1 second
         system("Clear");                             // clear terminal
-        string Option;                               // initalise option
         // Ouput options for the user
         cout << "Please select the number correlating to the function you wish "
                 "to utilise: "
@@ -133,11 +132,12 @@ void Investor::Display_Options()  // Display options
         while (!Broker_ID_Confirmation(Temp_ID) &&
                Temp_ID != -1)  // Keep looping until a valid ID is entered
         {
-          system("Clear");                             // clear terminal
-          cout << "Invalid ID Entered! " << endl;      // Invalid ID
-          this_thread::sleep_for(chrono::seconds(1));  // display for 1 second
+          system("Clear");                         // clear terminal
+          cout << "Invalid ID Entered! " << endl;  // Invalid ID
           cout << "What is the ID of the broker whos recommendations you would "
                   "like to see? (Or enter -1 to stop trying to add broker): ";
+          cin.clear();
+          cin.ignore(256, '\n');
           cin >> Temp_ID;  // take input of ID
         }
         if (Broker_ID_Confirmation(
@@ -247,14 +247,13 @@ void Investor::Buy() {
   cin >> Temp_Ticker;  // Take input of ticker from user
   cout << "How many units would you like to buy? ";
   cin >> Temp_Units;  // Take input of units from user
-  while(Temp_Units < 1 || cin.fail())
-  {
+  while (Temp_Units < 1 || cin.fail()) {
     cout << "Invalid Unit amount! How many units would you like to buy? ";
     cin.clear();
     cin.ignore(256, '\n');
     cin >> Temp_Units;  // Take input of units from user
   }
-  Share Temp_Share;   // create temporary share object
+  Share Temp_Share;  // create temporary share object
   if (Temp_Share.Check_Valid_Ticker(
           Temp_Ticker, Current_Year))  // Checking if ticker is valid
   {
@@ -274,8 +273,7 @@ void Investor::Sell() {
   cin >> Temp_Ticker;  // Take ticker input from user
   cout << "How many units would you like to Sell? ";
   cin >> Temp_Units;  // Take units input from user
-    while(Temp_Units < 1 || cin.fail())
-  {
+  while (Temp_Units < 1 || cin.fail()) {
     cout << "Invalid Unit amount! How many units would you like to sell? ";
     cin.clear();
     cin.ignore(256, '\n');
