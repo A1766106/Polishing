@@ -277,16 +277,25 @@ int Console::Create_Broker() {
   }
   cout << "Whats the maximum amount of clients you would like to have: ";
   cin >> Client_Count;  // Broker inputs the amount of clients he would like
+  while (Client_Count < 0 || cin.fail()) {
+    cout << "You entered an amount less than 0! Whats the maximum amount of "
+            "clients you would like to have: ";
+    cin.clear();
+    cin.ignore(256, '\n');
+    cin >> Client_Count;  // Broker inputs the amount of clients he would like
+  }
   int Client_ID[Client_Count];  // Client ID has the size of client count
   for (int j = 0; j < Client_Count; j++)  // loop from 0 to client count
   {
     cout << "Please provide the ID of client number " << j + 1
          << " (Or 0 if you dont have enough clients for quota of 3): ";
     cin >> Client_ID[j];  // input client ID
-    while (!Duplicate_ID(Client_ID[j]) && Client_ID[j] != 0) {
+    while (!Duplicate_ID(Client_ID[j]) && Client_ID[j] != 0 || cin.fail()) {
       cout << "You entered a non-existant ID!" << endl;
       cout << "Please try again and enter the ID of client number " << j + 1
            << " (Or 0 if you dont have enough clients for quota of 3): ";
+      cin.clear();
+      cin.ignore(256, '\n');
       cin >> Client_ID[j];  // input client ID
     }
   }
@@ -319,10 +328,12 @@ int Console::Create_Individual() {
   cin >> Given_Password;  // Takes password input from user
   cout << "Please provide your first name as you would like it to appear on "
           "your portfolio statement: ";
-  cin >> Individual_First_Name;  // Takes input of the first name
+  cin.ignore(1000, '\n');
+  getline(cin, Individual_First_Name);
   cout << "Please provide your last name as you would like it to appear on "
           "your portfolio statement: ";
-  cin >> Individual_Last_Name;                  // Takes input of last name
+  cin.ignore(1000, '\n');
+  getline(cin, Individual_Last_Name);           // Takes input of last name
   fstream Accounts;                             // File object
   Accounts.open("Accounts.csv", fstream::app);  // Open Accounts.csv
   Accounts << Given_ID << "," << Given_Password << ","
@@ -341,7 +352,16 @@ int Console::Create_Partnership() {
   cout << "Please provide password: ";
   cin >> Given_Password;  // Take password input
   cout << "How many partners are there? ";
-  cin >> Partner_Number;                        // take number of partners input
+  cin >> Partner_Number;
+  while (cin.fail() || Partner_Number < 1)  // Confirming valid input
+  {
+    cout << "Invalid Input! How many partners are there? ";
+    cin.clear();
+    cin.ignore(256, '\n');
+    cin >> Partner_Number;
+  }
+
+  // take number of partners input
   string Partners_First_Names[Partner_Number];  // intialises partners first
                                                 // name with number attached
   string Partners_Last_Names[Partner_Number];   // intialises partners last name
@@ -350,12 +370,12 @@ int Console::Create_Partnership() {
   {
     cout << "Please provide the first name for partner number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
-    cin >> Partners_First_Names[i];  // Take input of first name for current
-                                     // iteration of partner
+    cin.ignore(1000, '\n');
+    getline(cin, Partners_First_Names[i]);
     cout << "Please provide the last name for partner number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
-    cin >> Partners_Last_Names[i];  // Take input of last name for current
-                                    // iteration of partner
+    cin.ignore(1000, '\n');
+    getline(cin, Partners_Last_Names[i]);
   }
   fstream Accounts;                             // file object
   Accounts.open("Accounts.csv", fstream::app);  // open accounts csv
@@ -383,6 +403,13 @@ int Console::Create_Trust() {
   cin >> Given_Password;  // Takes input for password
   cout << "How many beneficiaries are there? ";
   cin >> Beneficiary_Number;  // Takes input for Beneficiary number
+  while (cin.fail() || Beneficiary_Number < 1)  // Confirming valid input
+  {
+    cout << "Invalid Input! How many Beneficiaries are there? ";
+    cin.clear();
+    cin.ignore(256, '\n');
+    cin >> Beneficiary_Number;
+  }
   string
       Beneficiary_First_Names[Beneficiary_Number];  // String for names with the
                                                     // size being the amount of
@@ -395,13 +422,22 @@ int Console::Create_Trust() {
        i++) {  // loop through from 0 to the amount of beneficiaries
     cout << "Please provide the first name for beneificary number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
-    cin >> Beneficiary_First_Names[i];  // Take input for beneficiaries names
+    cin.ignore(1000, '\n');
+    getline(cin, Beneficiary_First_Names[i]);
     cout << "Please provide the last name for beneificary number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
-    cin >> Beneficiary_Last_Names[i];  // Take input for beneficiaries names
+    cin.ignore(1000, '\n');
+    getline(cin, Beneficiary_Last_Names[i]);
   }
   cout << "How many trustees are there? ";
   cin >> Trustee_Number;  // Take input for the amount of trustees
+  while (cin.fail() || Trustee_Number < 1)  // Confirming valid input
+  {
+    cout << "Invalid Input! How many Trustees are there? ";
+    cin.clear();
+    cin.ignore(256, '\n');
+    cin >> Trustee_Number;
+  }
   string Trustee_First_Names[Beneficiary_Number];  // String for names with the
                                                    // size being the amount of
                                                    // trustees there are
@@ -413,10 +449,12 @@ int Console::Create_Trust() {
   {
     cout << "Please provide the first name for trustee number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
-    cin >> Trustee_First_Names[i];  // Take input for trustees names
+    cin.ignore(1000, '\n');
+    getline(cin, Trustee_First_Names[i]);
     cout << "Please provide the last name for trustee number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
-    cin >> Trustee_Last_Names[i];  // Take input for trustees names
+    cin.ignore(1000, '\n');
+    getline(cin, Trustee_Last_Names[i]);
   }
   fstream Accounts;                             // file object
   Accounts.open("Accounts.csv", fstream::app);  // open accounts csv
@@ -453,6 +491,13 @@ int Console::Create_Company() {
   getline(cin, Registered_Name);  // input registered name
   cout << "How many directors are there? ";
   cin >> Director_Number;  // User inputs how many directors there are
+  while (cin.fail() || Director_Number < 1)  // Confirming valid input
+  {
+    cout << "Invalid Input! How many Trustees are there? ";
+    cin.clear();
+    cin.ignore(256, '\n');
+    cin >> Director_Number;
+  }
   string Director_First_Names[Director_Number];  // string for directors names,
                                                  // Size = amount of directors
   string Director_Last_Names[Director_Number];   // string for directors names,

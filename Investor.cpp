@@ -37,10 +37,12 @@ void Investor::Display_Options()  // Display options
       cout << "9 - Sell Stocks " << endl;
       cout << "0 - Log Out" << endl;
       cin >> Option;  // Takes input from user
-      while (Option != "0" && Option != "1" && Option != "2" && Option != "3" &&
-             Option != "4" && Option != "5" && Option != "6" && Option != "7" &&
-             Option != "8" && Option != "9") {
+      while (Option != "0" || Option != "1" || Option != "2" || Option != "3" ||
+             Option != "4" || Option != "5" || Option != "6" || Option != "7" ||
+             Option != "8" || Option != "9") {
         system("Clear");
+        cin.clear();
+        cin.ignore(256, '\n');
         cout << "You didnt use a valid number! Please try again! "
              << endl;  // While the User does not input a valid number, show
                        // this message
@@ -245,6 +247,13 @@ void Investor::Buy() {
   cin >> Temp_Ticker;  // Take input of ticker from user
   cout << "How many units would you like to buy? ";
   cin >> Temp_Units;  // Take input of units from user
+  while(Temp_Units < 1 || cin.fail())
+  {
+    cout << "Invalid Unit amount! How many units would you like to buy? ";
+    cin.clear();
+    cin.ignore(256, '\n');
+    cin >> Temp_Units;  // Take input of units from user
+  }
   Share Temp_Share;   // create temporary share object
   if (Temp_Share.Check_Valid_Ticker(
           Temp_Ticker, Current_Year))  // Checking if ticker is valid
@@ -265,6 +274,13 @@ void Investor::Sell() {
   cin >> Temp_Ticker;  // Take ticker input from user
   cout << "How many units would you like to Sell? ";
   cin >> Temp_Units;  // Take units input from user
+    while(Temp_Units < 1 || cin.fail())
+  {
+    cout << "Invalid Unit amount! How many units would you like to sell? ";
+    cin.clear();
+    cin.ignore(256, '\n');
+    cin >> Temp_Units;  // Take input of units from user
+  }
   Investors_Portfolio->Sell_Share(
       Temp_Ticker, Current_Year,
       Temp_Units);  // Sell Share, remove from portfolio
