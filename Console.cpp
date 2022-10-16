@@ -344,9 +344,9 @@ int Console::Create_Partnership() {
   cin >> Partner_Number;                        // take number of partners input
   string Partners_First_Names[Partner_Number];  // intialises partners first
                                                 // name with number attached
-  string Partners_Last_Names[Partner_Number];  // intialises partners last name
-                                               // with number attached
-  for (int i = 0; i < Partner_Number; i++)  // Loop through all the partners
+  string Partners_Last_Names[Partner_Number];   // intialises partners last name
+                                                // with number attached
+  for (int i = 0; i < Partner_Number; i++)      // Loop through all the partners
   {
     cout << "Please provide the first name for partner number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
@@ -405,9 +405,9 @@ int Console::Create_Trust() {
   string Trustee_First_Names[Beneficiary_Number];  // String for names with the
                                                    // size being the amount of
                                                    // trustees there are
-  string Trustee_Last_Names[Beneficiary_Number];  // String for names with the
-                                                  // size being the amount of
-                                                  // trustees there are
+  string Trustee_Last_Names[Beneficiary_Number];   // String for names with the
+                                                   // size being the amount of
+                                                   // trustees there are
   for (int i = 0; i < Trustee_Number;
        i++)  // loop through from 0 to size of trustees number
   {
@@ -455,9 +455,9 @@ int Console::Create_Company() {
   cin >> Director_Number;  // User inputs how many directors there are
   string Director_First_Names[Director_Number];  // string for directors names,
                                                  // Size = amount of directors
-  string Director_Last_Names[Director_Number];  // string for directors names,
-                                                // Size = amount of directors
-  for (int i = 0; i < Director_Number; i++)  // Loop Through directors
+  string Director_Last_Names[Director_Number];   // string for directors names,
+                                                 // Size = amount of directors
+  for (int i = 0; i < Director_Number; i++)      // Loop Through directors
   {
     cout << "Please provide the first name for director number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
@@ -502,6 +502,11 @@ int Console::Get_ID() {
   int ID;
   cout << "Please provide your desired ID (Integers Only): ";
   cin >> ID;  // Takes input of a ID, has to be a number
+  while (ID <= 0) {
+    cout << "You entered an invalid number! Please provide your desired ID "
+            "(Integers Only): ";
+    cin >> ID;  // Takes input of a ID, has to be a number
+  }
   while (
       Duplicate_ID(ID))  // While the user inputs a duplicate ID, keep looping.
   {

@@ -28,6 +28,7 @@ Company::Company() {
   Current_Year = 2014;                  // Set current year to 2014
   Number_Of_Directors = 1;              // Set number of directors to 1
   Investors_Portfolio = new Portfolio;  // allocate memory
+  Broker_ID = 0;                        // Sets no broker
 }
 
 Company::Company(int ID) {
@@ -38,6 +39,7 @@ Company::Company(int ID) {
   Investors_Portfolio = new Portfolio;  // Allocate memory
   Logged_In = 1;                        // log in status is 1
   Display_Options();                    // Display options 1-9
+  Broker_ID = 0;                        // Sets no broker
 }
 
 void Company::Get_Company_Details() {
@@ -82,7 +84,7 @@ void Company::Set_Director_Count() {
     {
       Number_Of_Directors = stoi(
           Temp_Director_Count);  //...THe number of directors is equal to the
-                                 //temp director count. Stoi converts to int
+                                 // temp director count. Stoi converts to int
       Information.close();
       break;
     }

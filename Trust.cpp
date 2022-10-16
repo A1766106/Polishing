@@ -32,6 +32,7 @@ Trust::Trust() {
   Number_Of_Trustee = 1;
   Number_Of_Bene = 1;
   Investors_Portfolio = new Portfolio;
+  Broker_ID = 0;  // Sets no broker
 }
 
 Trust::Trust(int ID) {
@@ -42,6 +43,7 @@ Trust::Trust(int ID) {
   Investors_Portfolio = new Portfolio;
   Logged_In = 1;
   Display_Options();
+  Broker_ID = 0;  // Sets no broker
 }
 
 void Trust::Get_Trust_Details() {

@@ -154,7 +154,13 @@ void Investor::Display_Options()  // Display options
         Remove_Broker();
       } else if (Option == "7")  // If input is 7, get recommendations
       {
-        Get_Recommendations();
+        if (Broker_ID == 0) {
+          system("Clear");
+          cout << "You dont have a broker set!!" << endl;
+          this_thread::sleep_for(chrono::seconds(1));
+        } else {
+          Get_Recommendations();
+        }
       } else if (Option ==
                  "8")  // if input is 8, clear terminal and execute buy function
       {

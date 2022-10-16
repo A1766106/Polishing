@@ -46,7 +46,7 @@ void Portfolio::Buy_Share(std::string Ticker, int Current_Year, int Units) {
         Cash = Cash - (User_Shares[Share_Count].Get_Price(Current_Year) *
                        Units);  // User Balance = Balance minus (Current price
                                 // multiplied by units).
-        Share_Count++;  // iterate share ocunt
+        Share_Count++;          // iterate share ocunt
       } else {
         int Temp_Units =
             User_Shares[Index_For_Stock].Get_Units();  // Set units for stock
@@ -231,6 +231,4 @@ std::string Portfolio::Name(int Share_Number) {
 
 double Portfolio::Get_Cash() { return Cash; }
 // Free up memory
-Portfolio::~Portfolio()  ///////////////////////////////////////// Need to fix
-                         ///destructor error
-{}
+Portfolio::~Portfolio() {}

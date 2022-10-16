@@ -26,6 +26,7 @@ Partnership::Partnership() {
   Account_Type = "N/A";        // Set account type
   Current_Year = 2014;         // Set current year to 2014
   Number_Of_Partners = 1;      // Set number of partners
+  Broker_ID = 0;               // Sets no broker
   Investors_Portfolio =
       new Portfolio;  // Allocate memory for investors portfolio
 }
@@ -38,6 +39,7 @@ Partnership::Partnership(int ID) {
   Investors_Portfolio =
       new Portfolio;  // Allocate memory for investors portfolio
   Logged_In = 1;      // User is now logged in
+  Broker_ID = 0;      // Sets no broker
   Display_Options();
 }
 
@@ -109,8 +111,8 @@ void Partnership::Set_Partners_Names() {
   string Temp_Last_Name;
   First_Name = new string[Number_Of_Partners];  // Allocate memory for partners
                                                 // first names
-  Last_Name = new string[Number_Of_Partners];  // Allocate memory for partners
-                                               // last names
+  Last_Name = new string[Number_Of_Partners];   // Allocate memory for partners
+                                                // last names
   while (getline(Information, line))  // while loop to find Temporary ID
   {
     stringstream ss(line);

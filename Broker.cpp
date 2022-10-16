@@ -72,7 +72,7 @@ void Broker::Set_Commission() {
       Commission =
           stoi(Temp_Commission);  // then set the commission to the temp
                                   // commission and convert to a int using stoi.
-      Information.close();  // close object
+      Information.close();        // close object
       break;
     }
   }
@@ -275,142 +275,151 @@ void Broker::Display_Options() {
 void Broker::Print_Clients() {
   for (int i = 0; i < Client_Count; i++)  // loop through clients
   {
-    int Temp_ID_To_Search =
-        Clients_ID[i];  // temp id is equal to clients ID at current iteration
-    ifstream Information;              // file object
-    Information.open("Accounts.csv");  // open accounts csv
+    if (Clients_ID[i] != 0) {
+      int Temp_ID_To_Search =
+          Clients_ID[i];  // temp id is equal to clients ID at current iteration
+      ifstream Information;              // file object
+      Information.open("Accounts.csv");  // open accounts csv
 
-    if (!Information.is_open()) {
-      cout << "File wasnt found and openned " << endl;  // can not open file
-    }
-    string Temp_Recommendation[3] = {
-        "N/A"};                 // create string array of recommendations
-    string Temp_ID;             // create temp variable
-    int Int_Temp_ID;            // create temp variable
-    string Temp_Nothing;        // create temp variable
-    string line;                // create temp variable
-    string Temp_First_Name;     // create temp variable
-    string Temp_Type;           // create temp variable
-    string Temp_Partner_Count;  // create temp variable
-    string Temp_Bene_Count;     // create temp variable
-    string Temp_Trustee_Count;  // create temp variable
-    string Temp_Dir_Count;      // create temp variable
-    while (getline(Information,
-                   line))  // while loop, keeps looping until ID is mathched
-    {
-      stringstream ss(line);
-      getline(ss, Temp_ID, ',');
-      Int_Temp_ID = stoi(Temp_ID);
-      getline(ss, Temp_Nothing, ',');
-      getline(ss, Temp_Type, ',');
-      if (Int_Temp_ID == Temp_ID_To_Search)  // if temp ID is equal to Temp ID
-                                             // to search continute to type
-      {
-        if (Temp_Type ==
-            "B")  // if temp type is broker then output the following:
-        {
-          cout << "Client Number: " << i + 1 << endl;  // display client number
-          cout << "Client ID: " << Temp_ID_To_Search
-               << endl;  // display client ID
-          cout << "\t You have a broker saved in as a client and thus this "
-                  "information cant be displayed"
-               << endl;
-          this_thread::sleep_for(
-              chrono::seconds(1));    // disappear after 1 second
-        } else if (Temp_Type == "I")  // if an investor output the following
-        {
-          cout << "Client Number: " << i + 1 << endl;          // client number
-          cout << "Client ID: " << Temp_ID_To_Search << endl;  // client ID
-          cout << "\t Client Type: Invdividual" << endl;       // client type
-          cout << "\t Client ID: " << Int_Temp_ID << endl;     // client ID
-          getline(ss, Temp_Nothing, ',');
-          cout << "\t First Name: " << Temp_Nothing
-               << endl;  // display first name
-          getline(ss, Temp_Nothing, ',');
-          cout << "\t Last Name: " << Temp_Nothing << endl;  // display last
-                                                             // name
-        } else if (Temp_Type == "P")  // partnership
-        {
-          cout << "Client Number: " << i + 1 << endl;  // display client number
-          cout << "Client ID: " << Temp_ID_To_Search
-               << endl;                                     // display client ID
-          cout << "\t Client Type: Partnership" << endl;    // client type
-          cout << "\t Client ID: " << Int_Temp_ID << endl;  // display client ID
-          getline(ss, Temp_Partner_Count, ',');
-          for (int j = 0; j < stoi(Temp_Partner_Count);
-               j++)  // loop through partners, convert string to int using stoi
-          {
-            cout << "\t Partner Number: " << j + 1
-                 << endl;  // display partner number
-            getline(ss, Temp_Nothing, ',');
-            cout << "\t\t First Name: " << Temp_Nothing
-                 << endl;  // display first name
-            getline(ss, Temp_Nothing, ',');
-            cout << "\t\t Last Name: " << Temp_Nothing
-                 << endl;  // display last name
-          }
-        } else if (Temp_Type == "T")  // trust
-        {
-          cout << "Client Number: " << i + 1 << endl;  // client number
-          cout << "Client ID: " << Temp_ID_To_Search
-               << endl;                                     // display client ID
-          cout << "\t Client Type: Trust" << endl;          // type
-          cout << "\t Client ID: " << Int_Temp_ID << endl;  // display client ID
-          getline(ss, Temp_Bene_Count, ',');
-          for (int j = 0; j < stoi(Temp_Bene_Count);
-               j++)  // loop through beneficiaries
-          {
-            cout << "\t Beneficiary Number: " << j + 1
-                 << endl;  // display beneficiary number
-            getline(ss, Temp_Nothing, ',');
-            cout << "\t\t First Name: " << Temp_Nothing
-                 << endl;  // display first name
-            getline(ss, Temp_Nothing, ',');
-            cout << "\t\t Last Name: " << Temp_Nothing
-                 << endl;  // display last name
-          }
-          getline(ss, Temp_Trustee_Count, ',');
-          for (int j = 0; j < stoi(Temp_Trustee_Count);
-               j++)  // loop through trustees
-          {
-            cout << "Trustee Number: " << j + 1
-                 << endl;  // display trustee number
-            getline(ss, Temp_Nothing, ',');
-            cout << "\t\t First Name: " << Temp_Nothing
-                 << endl;  // display first name
-            getline(ss, Temp_Nothing, ',');
-            cout << "\t\t Last Name: " << Temp_Nothing
-                 << endl;  // display last name
-          }
-        } else if (Temp_Type == "C")  // company
-        {
-          cout << "Client Number: " << i + 1 << endl;  // display client number
-          cout << "Client ID: " << Temp_ID_To_Search
-               << endl;  // display client id
-          cout << "\t Client Type: Company" << endl;
-          cout << "\t Client ID: " << Int_Temp_ID << endl;  // display client id
-          getline(ss, Temp_Nothing, ',');
-          cout << "\t Company Name: " << Temp_Nothing
-               << endl;  // display company name
-          getline(ss, Temp_Dir_Count, ',');
-          for (int j = 0; j < stoi(Temp_Dir_Count);
-               j++)  // loop through the directors
-          {
-            cout << "\t Director Number: " << j + 1
-                 << endl;  // display director number
-            getline(ss, Temp_Nothing, ',');
-            cout << "\t\t First Name: " << Temp_Nothing
-                 << endl;  // display first name
-            getline(ss, Temp_Nothing, ',');
-            cout << "\t\t Last Name: " << Temp_Nothing
-                 << endl;  // display last name
-          }
-        }
-        Information.close();
-        break;
+      if (!Information.is_open()) {
+        cout << "File wasnt found and openned " << endl;  // can not open file
       }
+      string Temp_Recommendation[3] = {
+          "N/A"};                 // create string array of recommendations
+      string Temp_ID;             // create temp variable
+      int Int_Temp_ID;            // create temp variable
+      string Temp_Nothing;        // create temp variable
+      string line;                // create temp variable
+      string Temp_First_Name;     // create temp variable
+      string Temp_Type;           // create temp variable
+      string Temp_Partner_Count;  // create temp variable
+      string Temp_Bene_Count;     // create temp variable
+      string Temp_Trustee_Count;  // create temp variable
+      string Temp_Dir_Count;      // create temp variable
+      while (getline(Information,
+                     line))  // while loop, keeps looping until ID is mathched
+      {
+        stringstream ss(line);
+        getline(ss, Temp_ID, ',');
+        Int_Temp_ID = stoi(Temp_ID);
+        getline(ss, Temp_Nothing, ',');
+        getline(ss, Temp_Type, ',');
+        if (Int_Temp_ID == Temp_ID_To_Search)  // if temp ID is equal to Temp ID
+                                               // to search continute to type
+        {
+          if (Temp_Type ==
+              "B")  // if temp type is broker then output the following:
+          {
+            cout << "Client Number: " << i + 1
+                 << endl;  // display client number
+            cout << "Client ID: " << Temp_ID_To_Search
+                 << endl;  // display client ID
+            cout << "\t You have a broker saved in as a client and thus this "
+                    "information cant be displayed"
+                 << endl;
+            this_thread::sleep_for(
+                chrono::seconds(1));    // disappear after 1 second
+          } else if (Temp_Type == "I")  // if an investor output the following
+          {
+            cout << "Client Number: " << i + 1 << endl;  // client number
+            cout << "Client ID: " << Temp_ID_To_Search << endl;  // client ID
+            cout << "\t Client Type: Invdividual" << endl;       // client type
+            cout << "\t Client ID: " << Int_Temp_ID << endl;     // client ID
+            getline(ss, Temp_Nothing, ',');
+            cout << "\t First Name: " << Temp_Nothing
+                 << endl;  // display first name
+            getline(ss, Temp_Nothing, ',');
+            cout << "\t Last Name: " << Temp_Nothing << endl;  // display last
+                                                               // name
+          } else if (Temp_Type == "P")                         // partnership
+          {
+            cout << "Client Number: " << i + 1
+                 << endl;  // display client number
+            cout << "Client ID: " << Temp_ID_To_Search
+                 << endl;                                   // display client ID
+            cout << "\t Client Type: Partnership" << endl;  // client type
+            cout << "\t Client ID: " << Int_Temp_ID
+                 << endl;  // display client ID
+            getline(ss, Temp_Partner_Count, ',');
+            for (int j = 0; j < stoi(Temp_Partner_Count);
+                 j++)  // loop through partners, convert string to int using
+                       // stoi
+            {
+              cout << "\t Partner Number: " << j + 1
+                   << endl;  // display partner number
+              getline(ss, Temp_Nothing, ',');
+              cout << "\t\t First Name: " << Temp_Nothing
+                   << endl;  // display first name
+              getline(ss, Temp_Nothing, ',');
+              cout << "\t\t Last Name: " << Temp_Nothing
+                   << endl;  // display last name
+            }
+          } else if (Temp_Type == "T")  // trust
+          {
+            cout << "Client Number: " << i + 1 << endl;  // client number
+            cout << "Client ID: " << Temp_ID_To_Search
+                 << endl;                             // display client ID
+            cout << "\t Client Type: Trust" << endl;  // type
+            cout << "\t Client ID: " << Int_Temp_ID
+                 << endl;  // display client ID
+            getline(ss, Temp_Bene_Count, ',');
+            for (int j = 0; j < stoi(Temp_Bene_Count);
+                 j++)  // loop through beneficiaries
+            {
+              cout << "\t Beneficiary Number: " << j + 1
+                   << endl;  // display beneficiary number
+              getline(ss, Temp_Nothing, ',');
+              cout << "\t\t First Name: " << Temp_Nothing
+                   << endl;  // display first name
+              getline(ss, Temp_Nothing, ',');
+              cout << "\t\t Last Name: " << Temp_Nothing
+                   << endl;  // display last name
+            }
+            getline(ss, Temp_Trustee_Count, ',');
+            for (int j = 0; j < stoi(Temp_Trustee_Count);
+                 j++)  // loop through trustees
+            {
+              cout << "Trustee Number: " << j + 1
+                   << endl;  // display trustee number
+              getline(ss, Temp_Nothing, ',');
+              cout << "\t\t First Name: " << Temp_Nothing
+                   << endl;  // display first name
+              getline(ss, Temp_Nothing, ',');
+              cout << "\t\t Last Name: " << Temp_Nothing
+                   << endl;  // display last name
+            }
+          } else if (Temp_Type == "C")  // company
+          {
+            cout << "Client Number: " << i + 1
+                 << endl;  // display client number
+            cout << "Client ID: " << Temp_ID_To_Search
+                 << endl;  // display client id
+            cout << "\t Client Type: Company" << endl;
+            cout << "\t Client ID: " << Int_Temp_ID
+                 << endl;  // display client id
+            getline(ss, Temp_Nothing, ',');
+            cout << "\t Company Name: " << Temp_Nothing
+                 << endl;  // display company name
+            getline(ss, Temp_Dir_Count, ',');
+            for (int j = 0; j < stoi(Temp_Dir_Count);
+                 j++)  // loop through the directors
+            {
+              cout << "\t Director Number: " << j + 1
+                   << endl;  // display director number
+              getline(ss, Temp_Nothing, ',');
+              cout << "\t\t First Name: " << Temp_Nothing
+                   << endl;  // display first name
+              getline(ss, Temp_Nothing, ',');
+              cout << "\t\t Last Name: " << Temp_Nothing
+                   << endl;  // display last name
+            }
+          }
+          Information.close();
+          break;
+        }
+      }
+      Information.close();
     }
-    Information.close();
   }
   cout << "Press enter to return to main page" << endl;
   cin.ignore();
@@ -510,124 +519,127 @@ void Broker::Print_To_CSV() {
   Printed_Client << "Report for Brokers" << endl;
   for (int i = 0; i < Client_Count; i++)  // loop through clients
   {
-    Printed_Client << "Client Number: " << i + 1 << endl;  // print client
-                                                           // number
-    ifstream Information;              // file object
-    Information.open("Accounts.csv");  // open accounts csv
-    string Temp_ID;                    // create temp variable
-    int Int_Temp_ID;                   // create temp variable
-    string Temp_Nothing;               // create temp variable
-    string Temp_Partner_Count;         // create temp variable
-    string Temp_Bene_Count;            // create temp variable
-    string Temp_Trustee_Count;         // create temp variable
-    string Temp_Dir_Count;             // create temp variable
-    string Account_Types;              // create variable
-    string line;                       // create variable
-    while (getline(Information, line)) {
-      stringstream ss(line);
-      getline(ss, Temp_ID, ',');
-      Int_Temp_ID = stoi(Temp_ID);  // int temp ID is equal to the string temp
-                                    // id. Convert using stoi.
-      if (Int_Temp_ID ==
-          Clients_ID[i])  // if temp ID is equal to the clients ID and...
-      {
-        getline(ss, Temp_Nothing, ',');
-        getline(ss, Account_Types, ',');
-        if (Account_Types == "B")  //...the account is a broker then print the
-                                   //ID and following message
+    if (Clients_ID[i] != 0) {
+      Printed_Client << "Client Number: " << i + 1 << endl;  // print client
+                                                             // number
+      ifstream Information;                                  // file object
+      Information.open("Accounts.csv");  // open accounts csv
+      string Temp_ID;                    // create temp variable
+      int Int_Temp_ID;                   // create temp variable
+      string Temp_Nothing;               // create temp variable
+      string Temp_Partner_Count;         // create temp variable
+      string Temp_Bene_Count;            // create temp variable
+      string Temp_Trustee_Count;         // create temp variable
+      string Temp_Dir_Count;             // create temp variable
+      string Account_Types;              // create variable
+      string line;                       // create variable
+      while (getline(Information, line)) {
+        stringstream ss(line);
+        getline(ss, Temp_ID, ',');
+        Int_Temp_ID = stoi(Temp_ID);  // int temp ID is equal to the string temp
+                                      // id. Convert using stoi.
+        if (Int_Temp_ID ==
+            Clients_ID[i])  // if temp ID is equal to the clients ID and...
         {
-          Printed_Client << "\t ID: " << Int_Temp_ID << endl;  // print ID
-          Printed_Client << "\t This is a broker and as such no information "
-                            "can be displayed"
-                         << endl;
-        } else if (Account_Types == "I")  // Investor
-        {
-          Printed_Client << "\t Investor Type: Individual"
-                         << endl;  // display type
-          Printed_Client << "\t Investor ID: " << Int_Temp_ID
-                         << endl;  // display ID
           getline(ss, Temp_Nothing, ',');
-          Printed_Client << "\t\t First Name: " << Temp_Nothing
-                         << endl;  // display first name
-          getline(ss, Temp_Nothing, ',');
-          Printed_Client << "\t\t Last Name: " << Temp_Nothing
-                         << endl;         // display last name
-        } else if (Account_Types == "P")  // Partnership
-        {
-          Printed_Client << "\t Investor Type: Partnership"
-                         << endl;  // display type
-          Printed_Client << "\t Investor ID: " << Int_Temp_ID
-                         << endl;  // display investor ID
-          getline(ss, Temp_Partner_Count, ',');
-          for (int i = 0; i < stoi(Temp_Partner_Count);
-               i++)  // loop through partners
+          getline(ss, Account_Types, ',');
+          if (Account_Types == "B")  //...the account is a broker then print the
+                                     // ID and following message
           {
-            Printed_Client << "\t\t Partner Number: " << i + 1
-                           << endl;  // display partner number
+            Printed_Client << "\t ID: " << Int_Temp_ID << endl;  // print ID
+            Printed_Client << "\t This is a broker and as such no information "
+                              "can be displayed"
+                           << endl;
+          } else if (Account_Types == "I")  // Investor
+          {
+            Printed_Client << "\t Investor Type: Individual"
+                           << endl;  // display type
+            Printed_Client << "\t Investor ID: " << Int_Temp_ID
+                           << endl;  // display ID
             getline(ss, Temp_Nothing, ',');
-            Printed_Client << "\t\t\t First Name: " << Temp_Nothing
+            Printed_Client << "\t\t First Name: " << Temp_Nothing
                            << endl;  // display first name
             getline(ss, Temp_Nothing, ',');
-            Printed_Client << "\t\t\t Last Name: " << Temp_Nothing
-                           << endl;  // display last name
-          }
-        } else if (Account_Types == "T")  // trust
-        {
-          Printed_Client << "\t Investor Type: Trust" << endl;  // display type
-          Printed_Client << "\t Investor ID: " << Int_Temp_ID
-                         << endl;  // display ID
-          getline(ss, Temp_Trustee_Count, ',');
-          for (int i = 0; i < stoi(Temp_Trustee_Count);
-               i++)  // loop through trustees
+            Printed_Client << "\t\t Last Name: " << Temp_Nothing
+                           << endl;         // display last name
+          } else if (Account_Types == "P")  // Partnership
           {
-            Printed_Client << "\t\t Trustee Number: " << i + 1
-                           << endl;  // display trustees number
-            getline(ss, Temp_Nothing, ',');
-            Printed_Client << "\t\t\t First Name: " << Temp_Nothing
-                           << endl;  // display first name
-            getline(ss, Temp_Nothing, ',');
-            Printed_Client << "\t\t\t Last Name: " << Temp_Nothing
-                           << endl;  // display last name
-          }
-          getline(ss, Temp_Bene_Count, ',');
-          for (int i = 0; i < stoi(Temp_Bene_Count);
-               i++)  // loop through beneficiaries
+            Printed_Client << "\t Investor Type: Partnership"
+                           << endl;  // display type
+            Printed_Client << "\t Investor ID: " << Int_Temp_ID
+                           << endl;  // display investor ID
+            getline(ss, Temp_Partner_Count, ',');
+            for (int i = 0; i < stoi(Temp_Partner_Count);
+                 i++)  // loop through partners
+            {
+              Printed_Client << "\t\t Partner Number: " << i + 1
+                             << endl;  // display partner number
+              getline(ss, Temp_Nothing, ',');
+              Printed_Client << "\t\t\t First Name: " << Temp_Nothing
+                             << endl;  // display first name
+              getline(ss, Temp_Nothing, ',');
+              Printed_Client << "\t\t\t Last Name: " << Temp_Nothing
+                             << endl;  // display last name
+            }
+          } else if (Account_Types == "T")  // trust
           {
-            Printed_Client << "\t\t Beneficiary Number: " << i + 1
-                           << endl;  // display beneficiary number
-            getline(ss, Temp_Nothing, ',');
-            Printed_Client << "\t\t\t First Name: " << Temp_Nothing
-                           << endl;  // display first name
-            getline(ss, Temp_Nothing, ',');
-            Printed_Client << "\t\t\t Last Name: " << Temp_Nothing
-                           << endl;  // display last name
-          }
-        } else if (Account_Types == "C")  // company
-        {
-          Printed_Client << "\t Investor Type: Company" << endl;  // display
-                                                                  // type
-          Printed_Client << "\t Investor ID: " << Int_Temp_ID
-                         << endl;  // display ID
-          getline(ss, Temp_Nothing, ',');
-          Printed_Client << "\t Company Name: " << Temp_Nothing
-                         << endl;  // display company name
-          getline(ss, Temp_Dir_Count, ',');
-          for (int i = 0; i < stoi(Temp_Dir_Count);
-               i++)  // loop through directors
+            Printed_Client << "\t Investor Type: Trust"
+                           << endl;  // display type
+            Printed_Client << "\t Investor ID: " << Int_Temp_ID
+                           << endl;  // display ID
+            getline(ss, Temp_Trustee_Count, ',');
+            for (int i = 0; i < stoi(Temp_Trustee_Count);
+                 i++)  // loop through trustees
+            {
+              Printed_Client << "\t\t Trustee Number: " << i + 1
+                             << endl;  // display trustees number
+              getline(ss, Temp_Nothing, ',');
+              Printed_Client << "\t\t\t First Name: " << Temp_Nothing
+                             << endl;  // display first name
+              getline(ss, Temp_Nothing, ',');
+              Printed_Client << "\t\t\t Last Name: " << Temp_Nothing
+                             << endl;  // display last name
+            }
+            getline(ss, Temp_Bene_Count, ',');
+            for (int i = 0; i < stoi(Temp_Bene_Count);
+                 i++)  // loop through beneficiaries
+            {
+              Printed_Client << "\t\t Beneficiary Number: " << i + 1
+                             << endl;  // display beneficiary number
+              getline(ss, Temp_Nothing, ',');
+              Printed_Client << "\t\t\t First Name: " << Temp_Nothing
+                             << endl;  // display first name
+              getline(ss, Temp_Nothing, ',');
+              Printed_Client << "\t\t\t Last Name: " << Temp_Nothing
+                             << endl;  // display last name
+            }
+          } else if (Account_Types == "C")  // company
           {
-            Printed_Client << "\t\t Director Number: " << i + 1
-                           << endl;  // display director number
+            Printed_Client << "\t Investor Type: Company" << endl;  // display
+                                                                    // type
+            Printed_Client << "\t Investor ID: " << Int_Temp_ID
+                           << endl;  // display ID
             getline(ss, Temp_Nothing, ',');
-            Printed_Client << "\t\t\t First Name: " << Temp_Nothing
-                           << endl;  // display first name
-            getline(ss, Temp_Nothing, ',');
-            Printed_Client << "\t\t\t Last Name: " << Temp_Nothing
-                           << endl;  // display last name
+            Printed_Client << "\t Company Name: " << Temp_Nothing
+                           << endl;  // display company name
+            getline(ss, Temp_Dir_Count, ',');
+            for (int i = 0; i < stoi(Temp_Dir_Count);
+                 i++)  // loop through directors
+            {
+              Printed_Client << "\t\t Director Number: " << i + 1
+                             << endl;  // display director number
+              getline(ss, Temp_Nothing, ',');
+              Printed_Client << "\t\t\t First Name: " << Temp_Nothing
+                             << endl;  // display first name
+              getline(ss, Temp_Nothing, ',');
+              Printed_Client << "\t\t\t Last Name: " << Temp_Nothing
+                             << endl;  // display last name
+            }
           }
         }
       }
+      Information.close();
     }
-    Information.close();
   }
   Printed_Client.close();
 }

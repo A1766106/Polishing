@@ -24,6 +24,7 @@ Individual::Individual() {
   Account_Type = "N/A";                 // Set account type
   Current_Year = 2014;                  // Set current year 2014
   Investors_Portfolio = new Portfolio;  // Allocate memory
+  Broker_ID = 0;                        // Sets no broker
 }
 
 Individual::Individual(int ID) {
@@ -33,6 +34,7 @@ Individual::Individual(int ID) {
   Current_Year = 2014;                  // Set current year to 2014
   Investors_Portfolio = new Portfolio;  // allocate memory
   Logged_In = 1;                        // Log in status to 1
+  Broker_ID = 0;                        // Sets no broker
   Display_Options();                    // Display Options 1-9
 }
 
