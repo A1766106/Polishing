@@ -375,12 +375,12 @@ int Console::Create_Partnership() {
                                                 // name with number attached
   string Partners_Last_Names[Partner_Number];   // intialises partners last name
                                                 // with number attached
+  cin.clear();
+  cin.ignore(256, '\n');
   for (int i = 0; i < Partner_Number; i++)      // Loop through all the partners
   {
     cout << "Please provide the first name for partner number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
-    cin.clear();
-    cin.ignore(256, '\n');
     getline(cin, Partners_First_Names[i]);
     cout << "Please provide the last name for partner number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
@@ -427,13 +427,12 @@ int Console::Create_Trust() {
       Beneficiary_Last_Names[Beneficiary_Number];  // String for names with the
                                                    // size being the amount of
                                                    // beneficiaries there are
+  cin.clear();
+  cin.ignore(256, '\n');
   for (int i = 0; i < Beneficiary_Number;
        i++) {  // loop through from 0 to the amount of beneficiaries
     cout << "Please provide the first name for beneificary number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
-    cin.clear();
-    cin.ignore(256, '\n');
-    ;
     getline(cin, Beneficiary_First_Names[i]);
     cout << "Please provide the last name for beneificary number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
@@ -454,13 +453,13 @@ int Console::Create_Trust() {
   string Trustee_Last_Names[Beneficiary_Number];   // String for names with the
                                                    // size being the amount of
                                                    // trustees there are
+  cin.clear();
+  cin.ignore(256, '\n');
   for (int i = 0; i < Trustee_Number;
        i++)  // loop through from 0 to size of trustees number
   {
     cout << "Please provide the first name for trustee number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
-    cin.clear();
-    cin.ignore(256, '\n');
     getline(cin, Trustee_First_Names[i]);
     cout << "Please provide the last name for trustee number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
@@ -512,12 +511,20 @@ int Console::Create_Company() {
                                                  // Size = amount of directors
   string Director_Last_Names[Director_Number];   // string for directors names,
                                                  // Size = amount of directors
-  for (int i = 0; i < Director_Number; i++)      // Loop Through directors
+  cout << "Please provide the first name for director number " << 1
+       << " as you would like it to appear on your portfolio statement: ";
+  cin.clear();
+  cin.ignore(256, '\n');
+  getline(cin, Director_First_Names[0]);  // input director name for current
+                                          // iteration
+  cout << "Please provide the last name for director number " << 1
+       << " as you would like it to appear on your portfolio statement: ";
+  getline(cin,
+          Director_Last_Names[0]);  // input director name for current iteration
+  for (int i = 1; i < Director_Number; i++)  // Loop Through directors
   {
     cout << "Please provide the first name for director number " << i + 1
          << " as you would like it to appear on your portfolio statement: ";
-    cin.clear();
-    cin.ignore(256, '\n');
     getline(cin, Director_First_Names[i]);  // input director name for current
                                             // iteration
     cout << "Please provide the last name for director number " << i + 1
